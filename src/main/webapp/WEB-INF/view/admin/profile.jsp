@@ -21,11 +21,9 @@
 		<!-- page specific plugin styles -->
 
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/scripts/ace/assets/css/jquery-ui-1.10.3.custom.min.css" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/scripts/ace/assets/css/chosen.css" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/scripts/ace/assets/css/datepicker.css" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/scripts/ace/assets/css/bootstrap-timepicker.css" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/scripts/ace/assets/css/daterangepicker.css" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/scripts/ace/assets/css/colorpicker.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/scripts/ace/assets/css/jquery.gritter.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/scripts/ace/assets/css/select2.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/scripts/ace/assets/css/bootstrap-editable.css" />
 
 		<!-- fonts -->
 
@@ -53,7 +51,6 @@
 		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/html5shiv.js"></script>
 		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/respond.min.js"></script>
 		<![endif]-->
-		
 	</head>
 
 	<body>
@@ -180,7 +177,7 @@
 									</a>
 								</li>
 
-								<li class="active">
+								<li>
 									<a href="${pageContext.request.contextPath}/admin/userAdd">
 										<i class="icon-double-angle-right"></i>
 										新增用户
@@ -199,9 +196,15 @@
 										权限设置
 									</a>
 								</li>
+								<li class="active">
+									<a href="${pageContext.request.contextPath}/admin/profile">
+										<i class="icon-double-angle-right"></i>
+										个人资料
+									</a>
+								</li>
 							</ul>
 						</li>
-						<!-- end 系统管理 -->	
+						<!-- end 系统管理 -->
 					</ul><!-- /.nav-list -->
 
 					<div class="sidebar-collapse" id="sidebar-collapse">
@@ -228,7 +231,7 @@
 							<li>
 								<a href="#">系统管理</a>
 							</li>
-							<li class="active">新增用户</li>
+							<li class="active">个人资料</li>
 						</ul><!-- .breadcrumb -->
 
 					</div>
@@ -238,7 +241,7 @@
 							<h1>
 								<small>
 									<i class="icon-double-angle-right"></i>
-									用户基本数据新增
+									用户基本信息
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
@@ -246,72 +249,216 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-
-								<form class="form-horizontal" role="form">
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 用户名 </label>
-										<div class="col-sm-9">
-											<input type="text" id="form-field-1" placeholder="用户名" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>
-
-									<div class="space-4"></div>
-
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 密码 </label>
-										<div class="col-sm-9">
-											<input type="text" id="form-field-2" placeholder="密码" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>
-									
-									<div class="space-4"></div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 出生日期 </label>
-										<div class="col-sm-3">  
-											<div class="input-group">
-												<input class="form-control date-picker" id="id-date-picker-1" type="text" placeholder="出生日期" data-date-format="yyyy-mm-dd" />
-												<span class="input-group-addon">
-													<i class="icon-calendar bigger-110"></i>
+								<div>
+									<div id="user-profile-1" class="user-profile row">
+										<div class="col-xs-12 col-sm-3 center">
+											<div>
+												<span class="profile-picture">
+													<img id="avatar" class="editable img-responsive" alt="Alex's Avatar" src="${pageContext.request.contextPath}/scripts/ace/assets/avatars/profile-pic.jpg" />
 												</span>
+
+												<div class="space-4"></div>
+
+												<div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
+													<div class="inline position-relative">
+														<a href="#" class="user-title-label dropdown-toggle">
+															<i class="icon-circle light-green middle"></i>
+															&nbsp;
+															<span class="white">${curUser.username}</span>
+														</a>
+													</div>
+												</div>
 											</div>
+
+											<div class="space-6"></div>
+
+											<div class="profile-contact-info">
+												<div class="profile-contact-links align-left">
+													<a class="btn btn-link" href="#">
+														<i class="icon-plus-sign bigger-120 green"></i>
+														修改资料
+													</a>
+
+													<a class="btn btn-link" href="#">
+														<i class="icon-envelope bigger-120 pink"></i>
+														修改密码
+													</a>
+
+													<!-- <a class="btn btn-link" href="#">
+														<i class="icon-globe bigger-125 blue"></i>
+														www.alexdoe.com
+													</a> -->
+												</div>
+
+											</div>
+
+											<div class="hr hr12 dotted"></div>
+
+											<div class="clearfix">
+												<div class="grid2">
+													<span class="bigger-175 blue">25</span>
+
+													<br />
+													Followers
+												</div>
+
+												<div class="grid2">
+													<span class="bigger-175 blue">12</span>
+
+													<br />
+													Following
+												</div>
+											</div>
+
+											<div class="hr hr16 dotted"></div>
+										</div>
+
+										<div class="col-xs-12 col-sm-9">
+
+											<div class="profile-user-info profile-user-info-striped">
+												<div class="profile-info-row">
+													<div class="profile-info-name"> 用户名 </div>
+
+													<div class="profile-info-value">
+														<span class="editable" id="username">${curUser.username}</span>
+													</div>
+												</div>
+
+												<div class="profile-info-row">
+													<div class="profile-info-name"> 所在地 </div>
+
+													<div class="profile-info-value">
+														<i class="icon-map-marker light-orange bigger-110"></i>
+														<span class="editable" id="country">重庆市</span>
+														<span class="editable" id="city">渝北区</span>
+													</div>
+												</div>
+
+												<div class="profile-info-row">
+													<div class="profile-info-name"> 年龄 </div>
+
+													<div class="profile-info-value">
+														<span class="editable" id="age">38</span>
+													</div>
+												</div>
+
+												<div class="profile-info-row">
+													<div class="profile-info-name"> 注册时间 </div>
+
+													<div class="profile-info-value">
+														<span class="editable" id="signup">20/06/2010</span>
+													</div>
+												</div>
+
+												<div class="profile-info-row">
+													<div class="profile-info-name"> 最后登录时间 </div>
+
+													<div class="profile-info-value">
+														<span class="editable" id="login">3 hours ago</span>
+													</div>
+												</div>
+
+												<div class="profile-info-row">
+													<div class="profile-info-name"> 关于我 </div>
+
+													<div class="profile-info-value">
+														<span class="editable" id="about">一切皆有可能</span>
+													</div>
+												</div>
+											</div>
+
+											<div class="space-20"></div>
+
+											<div class="widget-box transparent">
+												<div class="widget-header widget-header-small">
+													<h4 class="blue smaller">
+														<i class="icon-rss orange"></i>
+														最近操作记录
+													</h4>
+
+													<div class="widget-toolbar action-buttons">
+														<button class="btn btn-minier btn-yellow">更多</button>
+													</div>
+												</div>
+
+												<div class="widget-body">
+													<div class="widget-main padding-8">
+														<div id="profile-feed-1" class="profile-feed">
+															<div class="profile-activity clearfix">
+																<div>
+																	<i class="pull-left thumbicon icon-key btn-info no-hover"></i>
+																	<a class="user" href="#"> Alex Doe </a>
+
+																	logged in.
+																	<div class="time">
+																		<i class="icon-time bigger-110"></i>
+																		16 hours ago
+																	</div>
+																</div>
+															</div><!-- 列表 -->
+															<div class="profile-activity clearfix">
+																<div>
+																	<i class="pull-left thumbicon icon-key btn-info no-hover"></i>
+																	<a class="user" href="#"> Alex Doe </a>
+
+																	logged in.
+																	<div class="time">
+																		<i class="icon-time bigger-110"></i>
+																		16 hours ago
+																	</div>
+																</div>
+															</div><!-- 列表 -->
+															<div class="profile-activity clearfix">
+																<div>
+																	<i class="pull-left thumbicon icon-key btn-info no-hover"></i>
+																	<a class="user" href="#"> Alex Doe </a>
+
+																	logged in.
+																	<div class="time">
+																		<i class="icon-time bigger-110"></i>
+																		16 hours ago
+																	</div>
+																</div>
+															</div><!-- 列表 -->
+															
+															<div class="profile-activity clearfix">
+																<div>
+																	<i class="pull-left thumbicon icon-key btn-info no-hover"></i>
+																	<a class="user" href="#"> Alex Doe </a>
+
+																	logged in.
+																	<div class="time">
+																		<i class="icon-time bigger-110"></i>
+																		16 hours ago
+																	</div>
+																</div>
+															</div><!-- 列表 -->
+															
+															<div class="profile-activity clearfix">
+																<div>
+																	<i class="pull-left thumbicon icon-key btn-info no-hover"></i>
+																	<a class="user" href="#"> Alex Doe </a>
+
+																	logged in.
+																	<div class="time">
+																		<i class="icon-time bigger-110"></i>
+																		16 hours ago
+																	</div>
+																</div>
+															</div><!-- 列表 -->
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="hr hr2 hr-double"></div>
+
+											<div class="space-6"></div>
 										</div>
 									</div>
-									
-									<div class="space-4"></div>
+								</div>
 
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 职位 </label>
-										<div class="col-sm-9">
-											<input type="text" id="form-field-2" placeholder="职位" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>
-									
-									<div class="space-4"></div>
-
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 出生地 </label>
-										<div class="col-sm-9">
-											<input type="text" id="form-field-2" placeholder="出生地" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>
-
-									<div class="space-4"></div>
-
-									<div class="clearfix form-actions">
-										<div class="col-md-offset-3 col-md-9">
-											<button class="btn btn-info" type="button" onclick="saveFunc()">
-												<i class="icon-ok bigger-110"></i>
-												保存
-											</button>
-
-											&nbsp; &nbsp; &nbsp;
-											<button class="btn" type="reset">
-												<i class="icon-undo bigger-110"></i>
-												重置
-											</button>
-										</div>
-									</div>
-
+								<!-- PAGE CONTENT ENDS -->
 							</div><!-- /.col -->
 						</div><!-- /.row -->
 					</div><!-- /.page-content -->
@@ -364,84 +511,33 @@
 
 		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
 		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/jquery.ui.touch-punch.min.js"></script>
-		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/chosen.jquery.min.js"></script>
-		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/fuelux/fuelux.spinner.min.js"></script>
+		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/jquery.gritter.min.js"></script>
+		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/bootbox.min.js"></script>
+		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/jquery.slimscroll.min.js"></script>
+		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/jquery.easy-pie-chart.min.js"></script>
+		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/jquery.hotkeys.min.js"></script>
+		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/bootstrap-wysiwyg.min.js"></script>
+		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/select2.min.js"></script>
 		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/date-time/bootstrap-datepicker.min.js"></script>
-		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/date-time/bootstrap-timepicker.min.js"></script>
-		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/date-time/moment.min.js"></script>
-		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/date-time/daterangepicker.min.js"></script>
-		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/bootstrap-colorpicker.min.js"></script>
-		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/jquery.knob.min.js"></script>
-		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/jquery.autosize.min.js"></script>
-		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
+		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/fuelux/fuelux.spinner.min.js"></script>
+		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/x-editable/bootstrap-editable.min.js"></script>
+		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/x-editable/ace-editable.min.js"></script>
 		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/jquery.maskedinput.min.js"></script>
-		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/bootstrap-tag.min.js"></script>
 
 		<!-- ace scripts -->
 
 		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/ace-elements.min.js"></script>
 		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/ace.min.js"></script>
 
-
-
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/scripts/artDialog/css/ui-dialog.css">
-		<script src="${pageContext.request.contextPath}/scripts/artDialog/dist/dialog-min.js"></script>
 		<!-- inline scripts related to this page -->
 
 		<script type="text/javascript">
-			var ENV = '${pageContext.request.contextPath}';
-			$(function($) {
-				
-				$('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
-					$(this).prev().focus();
-				});
+			jQuery(function($) {
+				/* $('#profile-feed-1').slimScroll({
+					height: '250px',
+					alwaysVisible : true
+				}); */
 			});
-			
-			function saveFunc(){
-				/* var d = dialog({
-				    content: '处理中...'
-				});
-				d.show(); */
-				
-				var pdialog = dialog({
-				    title: '提示',
-				    content: '    确定保存该信息？    ',
-				    okValue: '确定',
-				    ok: function () {
-				    	pdialog.close().remove();
-				    	var dia = dialog({
-						    content: '处理中...'
-						});
-						dia.showModal();
-						$.post(ENV+"/admin/user/add",{},function(data){
-							dia.close().remove();
-							if(data.success){
-								var d = dialog({
-								    content: '添加成功，2秒后跳转到列表中'
-								});
-								d.show();
-								setTimeout(function () {
-								    d.close().remove();
-								    window.location.href = ENV+"/admin/userManager";
-								}, 2000);						
-							}else{
-								var d = dialog({
-								    content: '添加失败'
-								});
-								d.show();
-								setTimeout(function () {
-								    d.close().remove();
-								}, 1500);
-							}
-						},'json');
-				        return false;
-				    },
-				    cancelValue: '取消',
-				    cancel: function () {}
-				}).width(230);
-				pdialog.showModal();
-				
-			}
 		</script>
 </body>
 </html>

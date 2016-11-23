@@ -44,6 +44,7 @@
 		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/html5shiv.js"></script>
 		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/respond.min.js"></script>
 		<![endif]-->
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/scripts/artDialog/css/ui-dialog.css">
 	</head>
 
 	<body>
@@ -66,25 +67,19 @@
 					<ul class="nav ace-nav">
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="${pageContext.request.contextPath}/scripts/ace/assets/avatars/user.jpg" alt="Jason's Photo" />
+								<img class="nav-user-photo" src="${pageContext.request.contextPath}/scripts/ace/assets/avatars/user.jpg" alt="${curUser.username}'s Photo" />
 								<span class="user-info">
 									<small>欢迎光临,</small>
-									Jason
+									${curUser.username}
 								</span>
 
 								<i class="icon-caret-down"></i>
 							</a>
 
 							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-								<li>
-									<a href="#">
-										<i class="icon-cog"></i>
-										设置
-									</a>
-								</li>
 
 								<li>
-									<a href="#">
+									<a href="${pageContext.request.contextPath}/admin/profile">
 										<i class="icon-user"></i>
 										个人资料
 									</a>
@@ -93,7 +88,7 @@
 								<li class="divider"></li>
 
 								<li>
-									<a href="#">
+									<a href="javascript:(void)" onclick="exit()">
 										<i class="icon-off"></i>
 										退出
 									</a>
@@ -297,6 +292,26 @@
 
 		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/ace-elements.min.js"></script>
 		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/ace.min.js"></script>
+		<script src="${pageContext.request.contextPath}/scripts/artDialog/dist/dialog-min.js"></script>
+		
+		<script type="text/javascript">
+			var ENV = '${pageContext.request.contextPath}';
+			function exit(){
+				var pdialog = dialog({
+				    title: '提示',
+				    content: '    确定退出系统？    ',
+				    okValue: '确定',
+				    ok: function () {
+				    	pdialog.close().remove();
+				    	window.locatio.href = ENV+"/logout";
+				        return false;
+				    },
+				    cancelValue: '留下',
+				    cancel: function () {}
+				}).width(230);
+				pdialog.showModal();
+			}
+		</script>
 </body>
 </html>
 

@@ -15,7 +15,7 @@ import com.loan.system.utils.GlobalUtil;
 @Controller
 public class LoginController {
 	@RequestMapping("loginAction")
-	public void admin(HttpServletRequest request,HttpServletResponse response){
+	public void login(HttpServletRequest request,HttpServletResponse response){
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		if (StringUtils.isEmpty(username)) {
@@ -47,6 +47,16 @@ public class LoginController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			} 
+		}
+	}
+
+	@RequestMapping("logout")
+	public void logout(HttpServletRequest request,HttpServletResponse response){
+		GlobalUtil.removeSessionUser(request);
+		try {
+			response.sendRedirect(GlobalUtil.getContextPath(request)+"login");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

@@ -72,36 +72,30 @@
 					<ul class="nav ace-nav">
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="${pageContext.request.contextPath}/scripts/ace/assets/avatars/user.jpg" alt="Jason's Photo" />
+								<img class="nav-user-photo" src="${pageContext.request.contextPath}/scripts/ace/assets/avatars/user.jpg" alt="${curUser.username}'s Photo" />
 								<span class="user-info">
-									<small>Welcome,</small>
-									Jason
+									<small>欢迎光临,</small>
+									${curUser.username}
 								</span>
 
 								<i class="icon-caret-down"></i>
 							</a>
 
 							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-								<li>
-									<a href="#">
-										<i class="icon-cog"></i>
-										Settings
-									</a>
-								</li>
 
 								<li>
-									<a href="#">
+									<a href="${pageContext.request.contextPath}/admin/profile">
 										<i class="icon-user"></i>
-										Profile
+										个人资料
 									</a>
 								</li>
 
 								<li class="divider"></li>
 
 								<li>
-									<a href="#">
+									<a href="javascript:(void)" onclick="exit()">
 										<i class="icon-off"></i>
-										Logout
+										退出
 									</a>
 								</li>
 							</ul>
