@@ -185,13 +185,13 @@
 								</li>
 
 								<li>
-									<a href="jqgrid.html">
+									<a href="#">
 										<i class="icon-double-angle-right"></i>
 										菜单管理
 									</a>
 								</li>
 								<li>
-									<a href="jqgrid.html">
+									<a href="#">
 										<i class="icon-double-angle-right"></i>
 										权限设置
 									</a>
