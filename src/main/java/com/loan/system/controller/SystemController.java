@@ -4,20 +4,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.loan.system.utils.GlobalData;
+
 @Controller
 public class SystemController {
-	@RequestMapping("index")
+	@RequestMapping("admin")
 	public ModelAndView index(){
-		return new ModelAndView("index");
+		ModelAndView view = new ModelAndView("index"); 
+		view.addObject("sys", GlobalData.system);
+		return view; 
 	}
 	
 	@RequestMapping("login")
 	public ModelAndView login(){
-		return new ModelAndView("login"); 
+		ModelAndView view = new ModelAndView("login"); 
+		view.addObject("sys", GlobalData.system);
+		return view; 
 	}
 	
-	@RequestMapping("admin")
-	public ModelAndView admin(){
-		return new ModelAndView("admin"); 
-	}
 }

@@ -2,36 +2,36 @@
     pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
 	<head>
 		<meta charset="utf-8" />
-		<title>后台登录</title>
-		<meta name="keywords" content="后台登录" />
-		<meta name="description" content="后台登录" />
+		<title>${sys.appName}</title>
+		<meta name="keywords" content="${sys.appKeywords}" />
+		<meta name="description" content="${sys.appDesc}" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<!-- basic styles -->
 
-		<link href="${pageContext.request.contextPath}/CQLOAN/scripts/ace/assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="/CQLOAN/scripts/ace/assets/css/font-awesome.min.css" />
+		<link href="${pageContext.request.contextPath}/scripts/ace/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/scripts/ace/assets/css/font-awesome.min.css" />
 
 		<!--[if IE 7]>
-		  <link rel="stylesheet" href="/CQLOAN/scripts/ace/assets/css/font-awesome-ie7.min.css" />
+		  <link rel="stylesheet" href="${pageContext.request.contextPath}/scripts/ace/assets/css/font-awesome-ie7.min.css" />
 		<![endif]-->
 
 		<!-- page specific plugin styles -->
 
 		<!-- fonts -->
 
-		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/scripts/ace/assets/css/css.css" />
 
 		<!-- ace styles -->
 
-		<link rel="stylesheet" href="/CQLOAN/scripts/ace/assets/css/ace.min.css" />
-		<link rel="stylesheet" href="/CQLOAN/scripts/ace/assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/scripts/ace/assets/css/ace.min.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/scripts/ace/assets/css/ace-rtl.min.css" />
 
 		<!--[if lte IE 8]>
-		  <link rel="stylesheet" href="/CQLOAN/scripts/ace/assets/css/ace-ie.min.css" />
+		  <link rel="stylesheet" href="${pageContext.request.contextPath}/scripts/ace/assets/css/ace-ie.min.css" />
 		<![endif]-->
 
 		<!-- inline styles related to this page -->
@@ -39,8 +39,8 @@
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
 		<!--[if lt IE 9]>
-		<script src="/CQLOAN/scripts/ace/assets/js/html5shiv.js"></script>
-		<script src="/CQLOAN/scripts/ace/assets/js/respond.min.js"></script>
+		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/html5shiv.js"></script>
+		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/respond.min.js"></script>
 		<![endif]-->
 	</head>
 
@@ -53,10 +53,10 @@
 							<div class="center">
 								<h1>
 									<i class="icon-leaf green"></i>
-									<span class="red">Ace</span>
-									<span class="white">Application</span>
+									<span class="red">贷款</span>
+									<span class="white">后台登录</span>
 								</h1>
-								<h4 class="blue">&copy; Company Name</h4>
+								<h4 class="blue">&copy; 重庆小资</h4>
 							</div>
 
 							<div class="space-6"></div>
@@ -72,18 +72,18 @@
 
 											<div class="space-6"></div>
 
-											<form>
+											<form action="${pageContext.request.contextPath}/loginAction" id="form">
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="用户名" />
+															<input type="text" id="username" name="username" class="form-control" placeholder="用户名" />
 															<i class="icon-user"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="密码" />
+															<input type="password" id="password" name="password" class="form-control" placeholder="密码" />
 															<i class="icon-lock"></i>
 														</span>
 													</label>
@@ -93,10 +93,10 @@
 													<div class="clearfix">
 														<label class="inline">
 															<input type="checkbox" class="ace" />
-															<span class="lbl"> Remember Me</span>
+															<span class="lbl"> 记住我</span>
 														</label>
 
-														<button type="button" class="width-35 pull-right btn btn-sm btn-primary">
+														<button type="button" class="width-35 pull-right btn btn-sm btn-primary" onclick="submitAction()">
 															<i class="icon-key"></i>
 															登录
 														</button>
@@ -107,10 +107,12 @@
 											</form>
 
 											<div class="social-or-login center">
-												<span class="bigger-110">Or Login Using</span>
+												<span class="bigger-110">或登录使用</span>
 											</div>
 
-											
+											<div style='color: red;margin-top: 5px;'>
+												<span id='login-error-info'></span>
+											</div>
 										</div><!-- /widget-main -->
 
 										<div class="toolbar clearfix">
@@ -121,12 +123,6 @@
 												</a>
 											</div>
 
-											<div>
-												<a href="#" onclick="show_box('signup-box'); return false;" class="user-signup-link">
-													注册
-													<i class="icon-arrow-right"></i>
-												</a>
-											</div>
 										</div>
 									</div><!-- /widget-body -->
 								</div><!-- /login-box -->
@@ -257,30 +253,30 @@
 
 		<!--[if !IE]> -->
 
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/jquery-2.0.3.min.js"></script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<![endif]-->
+		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/jquery-1.10.2.min.js"></script>
+		<![endif]-->
 
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='/CQLOAN/scripts/ace/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+			window.jQuery || document.write("<script src='${pageContext.request.contextPath}/scripts/ace/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 		</script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='/CQLOAN/scripts/ace/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
+		<script type="text/javascript">
+		 window.jQuery || document.write("<script src='${pageContext.request.contextPath}/scripts/ace/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+		</script>
+		<![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='/CQLOAN/scripts/ace/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+			if("ontouchend" in document) document.write("<script src='${pageContext.request.contextPath}/scripts/ace/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
 
 		<!-- inline scripts related to this page -->
@@ -290,7 +286,33 @@
 			 jQuery('.widget-box.visible').removeClass('visible');
 			 jQuery('#'+id).addClass('visible');
 			}
+			
+			
+			$(function(){
+				var timeout = '${param.timeout}';
+				if(timeout){
+					if(timeout == true || timeout == 'true'){
+						$('#login-error-info').text("未登录或已超时");
+					}else{
+						$('#login-error-info').text("");
+					}
+				}
+				var failure = '${param.failure}';
+				if(failure){
+					if(failure == 'USER-EMPTY'){
+						$('#login-error-info').text("用户名不能为空");
+					}else if(failure == 'PASSWORD-EMPTY'){
+						$('#login-error-info').text("密码不能为空");
+					}else if(failure == 'URPWD-ERROR'){
+						$('#login-error-info').text("用户名或密码错误");
+					}else{
+						$('#login-error-info').text("");
+					}
+				}
+			})
+			function submitAction(){
+				$("#form").submit();
+			}
 		</script>
-	<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>

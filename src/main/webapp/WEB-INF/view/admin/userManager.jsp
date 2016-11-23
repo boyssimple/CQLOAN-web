@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="cn">
@@ -8,7 +8,9 @@
 		<meta name="keywords" content="${sys.appKeywords}" />
 		<meta name="description" content="${sys.appDesc}" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 		<!-- basic styles -->
+
 		<link href="${pageContext.request.contextPath}/scripts/ace/assets/css/bootstrap.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/scripts/ace/assets/css/font-awesome.min.css" />
 
@@ -68,7 +70,7 @@
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								<img class="nav-user-photo" src="${pageContext.request.contextPath}/scripts/ace/assets/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
-									<small>欢迎光临,</small>
+									<small>Welcome,</small>
 									Jason
 								</span>
 
@@ -79,14 +81,14 @@
 								<li>
 									<a href="#">
 										<i class="icon-cog"></i>
-										设置
+										Settings
 									</a>
 								</li>
 
 								<li>
 									<a href="#">
 										<i class="icon-user"></i>
-										个人资料
+										Profile
 									</a>
 								</li>
 
@@ -95,7 +97,7 @@
 								<li>
 									<a href="#">
 										<i class="icon-off"></i>
-										退出
+										Logout
 									</a>
 								</li>
 							</ul>
@@ -149,17 +151,16 @@
 							<span class="btn btn-danger"></span>
 						</div>
 					</div><!-- #sidebar-shortcuts -->
-
 					<ul class="nav nav-list">
-						<li class="active">
-							<a href="index.html">
+						<li>
+							<a  href="${pageContext.request.contextPath}/admin">
 								<i class="icon-dashboard"></i>
 								<span class="menu-text"> 控制台 </span>
 							</a>
 						</li>
-						
+
 						<!-- 系统管理 -->
-						<li>
+						<li class="open">
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-list"></i>
 								<span class="menu-text"> 系统管理 </span>
@@ -167,14 +168,14 @@
 								<b class="arrow icon-angle-down"></b>
 							</a>
 
-							<ul class="submenu">
-								<li>
+							<ul class="submenu" style="display: block;">
+								<li class="active">
 									<a href="${pageContext.request.contextPath}/admin/userManager">
 										<i class="icon-double-angle-right"></i>
 										用户列表
 									</a>
 								</li>
-								
+
 								<li>
 									<a href="${pageContext.request.contextPath}/admin/userAdd">
 										<i class="icon-double-angle-right"></i>
@@ -217,47 +218,51 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="#">首页</a>
+								<a href="#">Home</a>
 							</li>
-							<li class="active">控制台</li>
+
+							<li>
+								<a href="#">系统管理</a>
+							</li>
+							<li class="active">用户列表</li>
 						</ul><!-- .breadcrumb -->
+
 					</div>
-
+		
 					<div class="page-content">
-						<div class="page-header">
-							<h1>
-								控制台
-								<small>
-									<i class="icon-double-angle-right"></i>
-									 查看
-								</small>
-							</h1>
-						</div><!-- /.page-header -->
-
-						<div class="row">
-							<div class="col-xs-12">
-								<!-- PAGE CONTENT BEGINS -->
-
-								<div class="alert alert-block alert-success">
-									<button type="button" class="close" data-dismiss="alert">
-										<i class="icon-remove"></i>
-									</button>
-
-									<i class="icon-ok green"></i>
-
-									欢迎使用
-									<strong class="green">
-										Ace后台管理系统
-										<small>(v1.2)</small>
-									</strong>
-									,轻量级好用的后台管理系统模版.	
-								</div>
-								<!-- PAGE CONTENT ENDS -->
+						<p>
+							<button class="btn btn-sm btn-warning" onclick="addUser()">
+								<i class="icon-fire bigger-110"></i>
+								<span class="bigger-110 no-text-shadow">新增用户</span>
+							</button>
+						</p>
+						<div class="row" style="background-color: white;">
+							<div class="col-xs-12" style="background-color: white;">
+								<table id="example" cellspacing="0" width="100%" class="table table-striped table-bordered table-hover">
+							        <thead>
+							            <tr>
+							                <th>id</th>
+							                <th>Name</th>
+							                <th>Position</th>
+							                <th>Office</th>
+							                <th>Age</th>
+							                <th>Startdate</th>
+							                <th>Salary</th>
+							                <th></th>
+							            </tr>
+							        </thead>
+							        <tbody>
+							        </tbody>
+							    </table>
 							</div><!-- /.col -->
 						</div><!-- /.row -->
 					</div><!-- /.page-content -->
 				</div><!-- /.main-content -->
-			</div><!-- /.main-container-inner -->
+
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
 		</div><!-- /.main-container -->
 
 		<!-- basic scripts -->
@@ -275,28 +280,156 @@
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='${pageContext.request.contextPath}/scripts/ace/assets/js/jquery-2.0.3.min.js'>"+"<"+"script>");
+			window.jQuery || document.write("<script src='${pageContext.request.contextPath}/scripts/ace/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 		</script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
 		<script type="text/javascript">
-		 window.jQuery || document.write("<script src='${pageContext.request.contextPath}/scripts/ace/assets/js/jquery-1.10.2.min.js'>"+"<"+"script>");
+		 window.jQuery || document.write("<script src='${pageContext.request.contextPath}/scripts/ace/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
 		</script>
 		<![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='${pageContext.request.contextPath}/scripts/ace/assets/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
+			if("ontouchend" in document) document.write("<script src='${pageContext.request.contextPath}/scripts/ace/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
 		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/bootstrap.min.js"></script>
 		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/typeahead-bs2.min.js"></script>
 
+		<!-- page specific plugin scripts -->
+
+		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/jquery.dataTables.min.js"></script>
+		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/jquery.dataTables.bootstrap.js"></script>
 
 		<!-- ace scripts -->
 
 		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/ace-elements.min.js"></script>
 		<script src="${pageContext.request.contextPath}/scripts/ace/assets/js/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+
+		<script type="text/javascript">
+			var ENV = '${pageContext.request.contextPath}';
+			jQuery(function($) {
+				/*
+				var oTable1 = $('#sample-table-2').dataTable( {
+				"aoColumns": [
+			      { "bSortable": false },
+			      null, null,null, null, null,
+				  { "bSortable": false }
+				] } );
+				*/
+				$('#example').dataTable({
+					"sAjaxSource": ENV+"/admin/user/loadUsers",
+					"bFilter": false,
+					"bLengthChange": false,
+					/* "aLengthMenu": [
+				        [ 50, 100, 150, -1 ],
+				        [ '50 rows', '100 rows', '150 rows', 'Show all' ]
+				    ], */
+					"aoColumnDefs":[{
+			       	 	"aTargets":[7],
+			       		"mRender": function(full, type, data) { // 返回自定义内容
+							var r = '<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">';
+								r+= '<a class="green" href="#" onclick="editFun('+data.ID+')">';
+								r+= '<i class="icon-pencil bigger-120"></i>';
+								r+= '</a>';
+
+								r+= '<a class="red" href="#" onclick="removeFun('+data.ID+')">';
+								r+= '<i class="icon-trash bigger-120"></i>';
+								r+= '</a>';
+								r+= '</div>';
+
+								r+= '<div class="visible-xs visible-sm hidden-md hidden-lg">';
+								r+= '<div class="inline position-relative">';
+								r+= '<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">';
+								r+= '<i class="icon-caret-down icon-only bigger-120"></i>';
+								r+= '</button>';
+
+								r+= '<ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">';
+
+								r+= '<li>';
+								r+= '<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">';
+								r+= '<span class="green">';
+								r+= '<i class="icon-edit bigger-120"></i>';
+								r+= '</span>';
+								r+= '</a>';
+								r+= '</li>';
+
+								r+= '<li>';
+								r+= '<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">';
+								r+= '<span class="red">';
+								r+= '<i class="icon-trash bigger-120"></i>';
+								r+= '</span>';
+								r+= '</a>';
+								r+= '</li>';
+								r+= '</ul>';
+								r+= '</div>';
+								r+= '</div>';
+			       		 	return r; 
+			       	 	}
+					}],
+					"aoColumns": [{
+			             "mData": "ID","bSortable": true,"bVisible":false
+			         },{
+			             "mData": "Name","bSortable": false
+			         }, {
+			             "mData": "Position","bSortable": false
+			         }, {
+			             "mData": "Office","bSortable": false
+			         }, {
+			             "mData": "Age","bSortable": false
+			         }, {
+			             "mData": "Startdate","bSortable": false
+			         }, {
+			             "mData": "Salary","bSortable": false
+			         }, {
+			             "mData": "action","bSortable": false
+			         }],
+			        "oLanguage":{
+			        	 "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据"
+			        }
+				});
+				/*
+				$('table th input:checkbox').on('click' , function(){
+					var that = this;
+					$(this).closest('table').find('tr > td:first-child input:checkbox')
+					.each(function(){
+						this.checked = that.checked;
+						$(this).closest('tr').toggleClass('selected');
+					});
+						
+				});
+			
+			
+				$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+				function tooltip_placement(context, source) {
+					var $source = $(source);
+					var $parent = $source.closest('table')
+					var off1 = $parent.offset();
+					var w1 = $parent.width();
+			
+					var off2 = $source.offset();
+					var w2 = $source.width();
+			
+					if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
+					return 'left';
+				}
+				*/
+			})
+			
+			function editFun(id){
+				alert(id);
+			}
+			
+			function removeFun(id){
+				alert(id);
+			}
+			
+			function addUser(){
+				window.location.href = ENV +'/admin/userAdd';
+			}
+		</script>
 </body>
 </html>
-

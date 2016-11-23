@@ -48,4 +48,13 @@
 		</property>
     </bean>
 	
+	<mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/**" />
+            <mvc:mapping path="/admin" />  
+            <!-- 需排除拦截的地址 -->  
+            <mvc:exclude-mapping path="/login"/>
+            <bean id="loginInterceptor" class="com.loan.system.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
